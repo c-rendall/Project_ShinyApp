@@ -27,7 +27,7 @@ shinyServer(function(input, output) {
     data <- dataInput()
     
     data %>%
-      ggplot(aes(x = Year, y = input$category_0)) +
+      ggplot(aes_string(x = Year, y = input$category_0)) +
       geom_bar(fill = "royalblue2", stat = "identity") + 
       ggtitle("Overview of Data by Year")
   })
@@ -43,14 +43,12 @@ shinyServer(function(input, output) {
    })
   
   output$ggplot1_bar <- renderPlot({
-     data1 <- dataInput()
-    
-    data1 %>% 
-       ggplot(aes(x = Year, y = Revenue)) +
-       geom_bar(stat = "identity") +
-       ggtitle("Top Categories by Revenue per Year") 
-       
-   })
+    dataInput() %>%
+      ggplot(aes_string(x =input$category_1, y = 'Revenue',
+                        fill=input$category_1)) +
+      geom_col() +
+      ggtitle("Top Categories by Revenue per Year")
+  })
   
 # Region ##########################################################################################
   
@@ -88,7 +86,7 @@ shinyServer(function(input, output) {
     data3 <- dataInput3()
     
     data3 %>%
-      ggplot(aes(reorder(Name, Revenue),  Revenue, fill = input$category_3)) +
+      ggplot(aes_string(reorder(Name, Revenue),  Revenue, fill = input$category_3)) +
         geom_bar(stat = "identity") + 
         ggtitle("Top 10 by Revenue") + 
         xlab("Games") + 
@@ -107,7 +105,7 @@ shinyServer(function(input, output) {
     data4 <- dataInput4()
     
     data4 %>%
-      ggplot(vgsales, aes(x = Region, y = Revenue, fill = input$category_4)) + 
+      ggplot(vgsales, aes_string(x = Region, y = Revenue, fill = input$category_4)) + 
       geom_boxplot() +
       scale_y_log10() +
       ggtitle("Distribution of Sales Revenue by Region") +
