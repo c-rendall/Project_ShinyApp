@@ -9,7 +9,6 @@ vgsales <- filter(vgsales, Year != 'N/A' & Year != '2017' & Year != '2020')
 #Video game releases by year 
 ggplot(vgsales, aes(x = Year)) + 
   geom_bar(fill = "skyblue2") + 
-  theme1() + 
   ggtitle("Games Released by Year")
 
 #Total video game revenue per year 
@@ -59,7 +58,6 @@ top_platform_rev_year <- vgsales %>%
 
 ggplot(top_platform_rev_year, aes(x = Year, y = Revenue, fill = Platform)) + 
   geom_bar(stat = "identity") + 
-  theme1() + 
   ggtitle("Top Platform by Revenue per Year")
 
 #Top publishers by total revenue
@@ -71,7 +69,6 @@ top_pub_total_rev <- vgsales %>%
 
 ggplot(top_pub_total_rev, aes(x = Year, y = Revenue, fill = Publisher)) + 
   geom_bar(stat = "identity") + 
-  theme1() + 
   ggtitle("Top 10 Publishers by Revenue") 
 
 #Genre by releases per year
@@ -177,7 +174,7 @@ ggplot(vgsales, aes(x = Region, y = Revenue, fill = Region)) +
   coord_flip()
 
 ggplot(vgsales, aes(x = Year, y = Revenue)) + 
-  geom_boxplot(fill = "#AA3929") +
+  geom_boxplot(fill = "red1") +
   scale_y_log10() +
   ggtitle("Distribution of Sales Revenue - Year") +
   coord_flip()
